@@ -1,0 +1,27 @@
+services:
+  web:
+    build: .
+    environment:
+      PGHOST: db
+    ports:
+      - '3000:3000'
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: timescale/timescaledb:latest-pg17
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  db_data:
