@@ -22,9 +22,9 @@
 </button>
 
 {#if data.product.image}
-	<img src={data.product.image} class="mx-auto" />
+	<img src={data.product.image} class="aspect-square h-auto" />
 {:else}
-	<FontAwesomeIcon icon={faImage} class="mx-auto" />
+	<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
 {/if}
 <h1 class="text-center">{data.product.name}</h1>
 

@@ -3,6 +3,7 @@ services:
     build: .
     environment:
       PGHOST: db
+      PGUSER: postgres
     ports:
       - '3000:3000'
     depends_on:

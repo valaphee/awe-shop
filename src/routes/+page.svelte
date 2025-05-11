@@ -46,9 +46,9 @@
 	{#each data.products as product (product.id)}
 		<a href="/{product.id}.html" class="p-2.5">
 			{#if product.image}
-				<img src={product.image} class="mx-auto" />
+				<img src={product.image} class="aspect-square h-auto" />
 			{:else}
-				<FontAwesomeIcon icon={faImage} class="mx-auto" />
+				<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
 			{/if}
 			<h3 class="text-center">{product.name}</h3>
 		</a>

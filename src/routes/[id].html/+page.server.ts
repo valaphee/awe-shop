@@ -18,9 +18,9 @@ export const load: PageServerLoad = async ({ params }) => {
 			name: product[0],
 			image: product[1] !== null ? await s3.presign(product[1]) : null
 		},
-		articles: articles.map((article) => ({
-			name: article[0],
-			url: article[1].replace('{id}', article[2])
+		merchants: merchants.map((merchant) => ({
+			name: merchant[0],
+			url: merchant[1].replace('{id}', merchant[2])
 		}))
 	};
 };

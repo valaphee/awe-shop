@@ -6,7 +6,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const query = url.searchParams.get('q');
 	const products = await sql`select id, name, image
 							from product
-							where ts @@ websearch_to_tsquery('english', ${query})`.values();
+							where name ilike ${`%${query}%`}`.values();
 	return {
 		products: await Promise.all(
 			products.map(async (product) => ({
