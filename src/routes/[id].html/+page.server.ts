@@ -1,10 +1,9 @@
 import type { PageServerLoad } from './$types';
 import { sql } from 'bun';
-import { s3 } from '$lib';
 
 export const load: PageServerLoad = async ({ params }) => {
 	const product = (
-		await sql`select name, image
+		await sql`select name
 							from product
 							where id = ${params.id}`.values()
 	)[0];
@@ -15,8 +14,7 @@ export const load: PageServerLoad = async ({ params }) => {
 							where product = ${params.id}`.values();
 	return {
 		product: {
-			name: product[0],
-			image: product[1] !== null ? await s3.presign(product[1]) : null
+			name: product[0]
 		},
 		merchants: merchants.map((merchant) => ({
 			name: merchant[0],

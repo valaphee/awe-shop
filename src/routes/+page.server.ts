@@ -1,19 +1,20 @@
 import type { PageServerLoad } from './$types';
 import { sql } from 'bun';
-import { s3 } from '$lib';
 
 export const load: PageServerLoad = async ({ url }) => {
-	const query = url.searchParams.get('q');
-	const products = await sql`select id, name, image
+	const name = url.searchParams.get('q');
+	const tags = url.searchParams.get('t')?.split(',');
+	const products =
+		await sql`with tags as materialized (select array_agg(id) as ids from tag where name in (${sql(tags)}))
+							select id, name
 							from product
-							where name ilike ${`%${query}%`}`.values();
+										 cross join tags
+							where name ilike ${`%${name}%`}
+								and product.tags @> tags.ids`.values();
 	return {
-		products: await Promise.all(
-			products.map(async (product) => ({
-				id: product[0],
-				name: product[1],
-				image: product[2] !== null ? await s3.presign(product[2]) : null
-			}))
-		)
+		products: products.map((product) => ({
+			id: product[0],
+			name: product[1]
+		}))
 	};
 };

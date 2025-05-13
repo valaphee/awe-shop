@@ -1,7 +1,9 @@
-drop table article;
+drop table listing;
 
-drop table product;
+drop table article;
 
 drop table merchant;
 
-drop table producer;
+drop table product;
+
+drop table tag;

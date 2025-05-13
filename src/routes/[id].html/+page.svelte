@@ -21,11 +21,7 @@
 	<FontAwesomeIcon icon={faArrowLeft} class="w-4 h-4" />
 </button>
 
-{#if data.product.image}
-	<img src={data.product.image} class="aspect-square h-auto" />
-{:else}
-	<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
-{/if}
+<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
 <h1 class="text-center">{data.product.name}</h1>
 
 <div>

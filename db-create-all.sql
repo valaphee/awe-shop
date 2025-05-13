@@ -1,27 +1,25 @@
-create table producer
+create table tag
 (
-    id   bigint generated always as identity
+    id   int not null
         primary key,
-    name text not null,
-    addr text not null
+    name character varying(255)
+);
+
+create table product
+(
+    id   bigint not null
+        primary key,
+    name character varying(255),
+    tags int[]  not null
 );
 
 create table merchant
 (
     id   bigint generated always as identity
         primary key,
-    name text not null,
+    name character varying(255),
     addr text not null,
     url  text
-);
-
-create table product
-(
-    id       bigint not null
-        primary key,
-    name     text   not null,
-    producer bigint not null
-        references producer
 );
 
 create table article
@@ -33,4 +31,12 @@ create table article
     merchant    bigint not null
         references merchant,
     merchant_id bigint
+);
+
+create table listing
+(
+    id    bigint generated always as identity
+        references article,
+    at    timestamp not null,
+    price int       not null
 );
