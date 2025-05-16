@@ -25,9 +25,9 @@
 <h1 class="text-center">{data.product.name}</h1>
 
 <div>
-	{#each data.merchants as merchant (merchant.name)}
+	{#each data.shops as shop (shop.name)}
 		<div>
-			<a target="_blank" href={merchant.url}>{merchant.name}</a>
+			{shop.name}
 		</div>
 	{/each}
 </div>

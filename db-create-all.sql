@@ -1,11 +1,4 @@
-create table tag
-(
-    id   int not null
-        primary key,
-    name character varying(255)
-);
-
-create table product
+create table item
 (
     id   bigint not null
         primary key,
@@ -13,7 +6,7 @@ create table product
     tags int[]  not null
 );
 
-create table merchant
+create table shop
 (
     id   bigint generated always as identity
         primary key,
@@ -22,21 +15,22 @@ create table merchant
     url  text
 );
 
-create table article
+create table list
 (
-    id          bigint generated always as identity
+    id   bigint generated always as identity
         primary key,
-    product     bigint not null
-        references product,
-    merchant    bigint not null
-        references merchant,
-    merchant_id bigint
+    item bigint not null
+        references item,
+    shop bigint not null
+        references shop
 );
 
-create table listing
+create table list_price
 (
-    id    bigint generated always as identity
-        references article,
-    at    timestamp not null,
+    id    bigint    not null
+        references list,
+    at    timestamp not null default current_timestamp,
     price int       not null
 );
+
+select create_hypertable('list_price', by_range('at'))

@@ -43,10 +43,10 @@
 </form>
 
 <div class="grid grid-cols-2">
-	{#each data.products as product (product.id)}
-		<a href="/{product.id}.html" class="p-2.5">
+	{#each data.items as item (item.id)}
+		<a href="/{item.id}.html" class="p-2.5">
 			<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
-			<h3 class="text-center">{product.name}</h3>
+			<h3 class="text-center">{item.name}</h3>
 		</a>
 	{/each}
 </div>

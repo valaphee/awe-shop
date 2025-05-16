@@ -1,9 +1,7 @@
-drop table listing;
+drop table list_price;
 
-drop table article;
+drop table list;
 
-drop table merchant;
+drop table shop;
 
-drop table product;
-
-drop table tag;
+drop table item;
