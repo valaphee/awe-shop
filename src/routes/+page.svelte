@@ -26,14 +26,15 @@
 	data-sveltekit-keepfocus
 	data-sveltekit-noscroll
 	autocomplete="off"
+	class="fixed w-full"
 >
 	<div class="relative">
 		<input
 			bind:this={input}
 			type="search"
 			name="q"
-			class="w-full p-2.5 text-sm"
 			oninput={debounce(() => form.requestSubmit())}
+			class="w-full p-2.5 text-sm"
 		/>
 		<button type="submit" class="absolute top-0 end-0 h-full p-2.5 text-sm font-medium">
 			<FontAwesomeIcon icon={faMagnifyingGlass} class="w-4 h-4" />
@@ -45,7 +46,11 @@
 <div class="grid grid-cols-2">
 	{#each data.items as item (item.id)}
 		<a href="/{item.id}.html" class="p-2.5">
-			<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
+			{#if item.image}
+				<img loading="lazy" src="{item.image}?impolicy=search" class="aspect-square h-auto" />
+			{:else}
+				<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
+			{/if}
 			<h3 class="text-center">{item.name}</h3>
 		</a>
 	{/each}

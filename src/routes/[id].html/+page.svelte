@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.product.name}</title>
+	<title>{data.item.name}</title>
 </svelte:head>
 
 <button
@@ -21,13 +21,17 @@
 	<FontAwesomeIcon icon={faArrowLeft} class="w-4 h-4" />
 </button>
 
-<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
-<h1 class="text-center">{data.product.name}</h1>
+{#if data.item.image}
+	<img src="{data.item.image}?impolicy=pdp" class="aspect-square h-auto" />
+{:else}
+	<FontAwesomeIcon icon={faImage} class="aspect-square h-auto" />
+{/if}
+<h1 class="text-center">{data.item.name}</h1>
 
 <div>
 	{#each data.shops as shop (shop.name)}
 		<div>
-			{shop.name}
+			<a target="_blank" href={shop.url}>{shop.name}</a>
 		</div>
 	{/each}
 </div>
