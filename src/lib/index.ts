@@ -1,6 +1,9 @@
-import FontAwesomeIcon from './FontAwesomeIcon.svelte';
+import { writable } from 'svelte/store';
 
-export { FontAwesomeIcon };
+import FontAwesomeIcon from './FontAwesomeIcon.svelte';
+import locales from '../locales';
+
+export { FontAwesomeIcon, locales };
 
 export const debounce = (callback: Function, wait = 250) => {
 	let timeout: ReturnType<typeof setTimeout>;
@@ -12,3 +15,5 @@ export const debounce = (callback: Function, wait = 250) => {
 		}, wait);
 	};
 };
+
+export const locale = writable(locales.en);
