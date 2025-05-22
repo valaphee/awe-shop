@@ -12,7 +12,7 @@
 </script>
 
 <svelte:head>
-	<title>{$locale.search}</title>
+	<title></title>
 </svelte:head>
 
 <form

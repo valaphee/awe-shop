@@ -1,10 +1,17 @@
 import type { PageServerLoad } from './$types';
 import { sql } from 'bun';
+import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ request, params }) => {
 	const [item] = await sql`select name, image
 													 from item
 													 where id = ${params.id}`;
+	if (!item) {
+		error(404, {
+			message: 'Not Found'
+		});
+	}
+
 	const shops = await sql`select shop.name, list.url
 													from list
 																 join shop on list.shop = shop.id
