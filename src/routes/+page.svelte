@@ -4,16 +4,11 @@
 
 	import { page } from '$app/state';
 
-	import { onMount } from 'svelte';
 	import { FontAwesomeIcon, locale, debounce } from '$lib';
-	import { faImage, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+	import { faBarcode, faImage } from '@fortawesome/free-solid-svg-icons';
 
-	let form: HTMLFormElement;
-	let input: HTMLInputElement;
-
-	onMount(() => {
-		input.value = page.url.searchParams.get('q');
-	});
+	let search: HTMLFormElement;
+	const searchQuery = page.url.searchParams.get('q');
 </script>
 
 <svelte:head>
@@ -21,26 +16,24 @@
 </svelte:head>
 
 <form
-	bind:this={form}
+	bind:this={search}
 	data-sveltekit-replacestate
 	data-sveltekit-keepfocus
 	data-sveltekit-noscroll
 	autocomplete="off"
-	class="fixed w-full"
+	class="sticky top-0 w-full"
 >
-	<div class="relative">
-		<input
-			bind:this={input}
-			type="search"
-			name="q"
-			oninput={debounce(() => form.requestSubmit())}
-			class="w-full p-2.5 text-sm"
-		/>
-		<button type="submit" class="absolute top-0 end-0 h-full p-2.5 text-sm font-medium">
-			<FontAwesomeIcon icon={faMagnifyingGlass} class="w-4 h-4" />
-			<span class="sr-only">{$locale.search}</span>
-		</button>
-	</div>
+	<input
+		type="search"
+		name="q"
+		title={$locale.search}
+		value={searchQuery}
+		oninput={debounce(() => search.requestSubmit())}
+		class="w-full p-2.5 text-sm"
+	/>
+	<button title={$locale.searchBarcode} class="absolute end-0 h-full p-2.5 text-sm font-medium">
+		<FontAwesomeIcon icon={faBarcode} class="w-5 h-5" />
+	</button>
 </form>
 
 <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(13.75rem, 1fr))">

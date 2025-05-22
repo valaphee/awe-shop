@@ -10,10 +10,12 @@
 	<title>{data.item.name}</title>
 </svelte:head>
 
-<button class="p-2.5" onclick={() => window.history.back()}>
-	<FontAwesomeIcon icon={faArrowLeft} class="w-4 h-4" />
-	<span class="sr-only">{$locale.back}</span>
-</button>
+<div class="sticky top-0 w-full">
+	<a href={data.back} class="block p-2.5" onclick={() => window.history.back()}>
+		<FontAwesomeIcon icon={faArrowLeft} class="w-5 h-5" />
+		<span class="sr-only">{$locale.back}</span>
+	</a>
+</div>
 
 {#if data.item.image}
 	<img src={data.item.image} alt="" class="aspect-square h-auto" />
@@ -24,8 +26,6 @@
 
 <div>
 	{#each data.shops as shop (shop.name)}
-		<div>
-			<a target="_blank" href={shop.url}>{shop.name}</a>
-		</div>
+		<a target="_blank" href={shop.url}>{shop.name}</a>
 	{/each}
 </div>

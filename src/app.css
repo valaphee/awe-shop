@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+button {
+	cursor: pointer;
+}
+
 svg {
 	fill: currentColor;
 }
