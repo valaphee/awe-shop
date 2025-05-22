@@ -8,10 +8,12 @@
 
 <svelte:head>
 	<title>{data.item.name}</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
 </svelte:head>
 
 <div class="sticky top-0 w-full">
-	<a href={data.back} class="block p-2.5" onclick={() => window.history.back()}>
+	<a href={data.back} title={$locale.back} class="block p-2.5" onclick={() => window.history.back()}>
 		<FontAwesomeIcon icon={faArrowLeft} class="w-5 h-5" />
 		<span class="sr-only">{$locale.back}</span>
 	</a>
