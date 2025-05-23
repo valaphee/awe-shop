@@ -21,12 +21,13 @@
 	data-sveltekit-keepfocus
 	data-sveltekit-noscroll
 	autocomplete="off"
-	class="sticky top-0 w-full"
+	class="sticky top-0 w-full dark:bg-gray-900"
 >
 	<input
 		type="search"
 		name="q"
 		title={$locale.search}
+		placeholder={$locale.search}
 		value={searchQuery}
 		oninput={debounce(() => search.requestSubmit())}
 		class="w-full p-2.5 text-sm"
@@ -34,11 +35,12 @@
 	<button title={$locale.searchBarcode} class="absolute end-0 h-full p-2.5 text-sm font-medium">
 		<FontAwesomeIcon icon={faBarcode} class="w-5 h-5" />
 	</button>
+	<hr />
 </form>
 
-<div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(13.75rem, 1fr))">
+<div class="grid p-1" style="grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr))">
 	{#each data.items as item (item.id)}
-		<a href="/{item.id}.html" class="p-2.5">
+		<a href="/{item.id}.html" class="m-1 p-1 rounded-lg dark:bg-gray-900">
 			{#if item.image}
 				<img loading="lazy" src="{item.image}?imwidth=304" alt="" class="h-40 w-40 m-auto" />
 			{:else}

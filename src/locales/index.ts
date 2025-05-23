@@ -4,4 +4,6 @@ import en from '../locales/en.json';
 export default {
 	de,
 	en
+} as {
+	[locale: string]: typeof en;
 };

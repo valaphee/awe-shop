@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="%lang%">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="format-detection" content="telephone=no" />
-		<link rel="manifest" href="/manifest.webmanifest" />
-		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<!--<link rel="icon" type="image/png" href="%sveltekit.assets%/favicon-96x96.png" sizes="96x96" />-->
+		<link rel="icon" type="image/svg+xml" href="%sveltekit.assets%/favicon.svg" />
+		<link rel="manifest" href="%sveltekit.assets%/site.webmanifest" />
 		%sveltekit.head%
 	</head>
-	<body>
-		<div style="display: contents">%sveltekit.body%</div>
+	<body itemtype="http://schema.org/WebPage" itemscope class="dark:bg-gray-950 dark:text-white">
+		%sveltekit.body%
 	</body>
 </html>
