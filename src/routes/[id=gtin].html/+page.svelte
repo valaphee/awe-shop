@@ -23,23 +23,12 @@
 </div>
 
 <div itemprop="mainEntity" itemtype="https://schema.org/Product" itemscope>
-	<div class="dark:bg-gray-900">
+	<div class="p-2 dark:bg-gray-900">
 		{#if data.item.image}
-			<img itemprop="image" src={data.item.image} alt="" class="h-80 w-80 m-auto" />
+			<img itemprop="image" src={data.item.image} alt="" class="h-60 w-60 m-auto" />
 		{:else}
-			<FontAwesomeIcon icon={faImage} class="h-80 w-80 m-auto" />
+			<FontAwesomeIcon icon={faImage} class="h-60 w-60 m-auto" />
 		{/if}
-		<h1 itemprop="name" class="text-center text-xl font-bold">{data.item.name}</h1>
-	</div>
-
-	<div>
-		<h2 class="m-5 text-xl font-bold">{$locale.offers}</h2>
-		<div class="m-5 dark:bg-gray-900">
-			{#each data.shops as shop (shop.name)}
-				<div itemprop="offers" itemtype="https://schema.org/Offer" itemscope>
-					<a itemprop="url" target="_blank" href={shop.url}>{shop.name}</a>
-				</div>
-			{/each}
-		</div>
+		<h1 itemprop="name" class="text-xl font-bold">{data.item.name}</h1>
 	</div>
 </div>
