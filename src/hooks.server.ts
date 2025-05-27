@@ -1,14 +1,14 @@
 import type { Handle } from '@sveltejs/kit';
 
-import { locale, locales } from '$lib';
+import { default as def, all } from '$lib/locales';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	let lang = 'en';
 	for (const prefLang in event.request.headers.get('accept-language')?.split(',')) {
 		const prefLangCode = prefLang.split(';', 2)[0];
-		if (locales[prefLangCode]) {
+		if (all[prefLangCode]) {
 			lang = prefLangCode;
-			locale.set(locales[prefLangCode]);
+			def.set(all[prefLangCode]);
 			break;
 		}
 	}

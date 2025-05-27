@@ -10,7 +10,7 @@
 
 {#if i[4]}
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {i[0]} {i[1]}" class={clazz}>
-		{#if typeof i[4] == 'string'}
+		{#if typeof i[4] === 'string'}
 			<path d={i[4]} />
 		{:else}
 			<path d={i[4][0]} />

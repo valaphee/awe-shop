@@ -1,13 +1,3 @@
-import { writable } from 'svelte/store';
-
-import FontAwesomeIcon from './FontAwesomeIcon.svelte';
-import Scan from './Scan.svelte';
-import locales from '../locales';
-
-export { FontAwesomeIcon, Scan, locales };
-
-export const locale = writable(locales.en);
-
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export const preventDefault = (fn: Function) => {
 	return (event: Event) => {

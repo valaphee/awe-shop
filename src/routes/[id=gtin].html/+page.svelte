@@ -2,7 +2,9 @@
 	import type { LayoutProps } from './$types';
 	let { data }: LayoutProps = $props();
 
-	import { FontAwesomeIcon, locale, preventDefault } from '$lib';
+	import { FontAwesomeIcon } from '$lib/components';
+	import locale from '$lib/locales';
+	import { preventDefault } from '$lib/utils';
 	import { faArrowLeft, faImage } from '@fortawesome/free-solid-svg-icons';
 </script>
 

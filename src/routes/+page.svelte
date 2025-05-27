@@ -3,9 +3,11 @@
 	let { data }: LayoutProps = $props();
 
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
+	import { goto, preloadData } from '$app/navigation';
 
-	import { FontAwesomeIcon, Scan, locale, debounce } from '$lib';
+	import { FontAwesomeIcon, Scan } from '$lib/components';
+	import locale from '$lib/locales';
+	import { debounce } from '$lib/utils';
 	import { faArrowLeft, faBarcode, faImage, faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 	let search: HTMLFormElement;
@@ -29,7 +31,14 @@
 		</button>
 		<hr />
 	</div>
-	<Scan torch={scanTorch} onscan={(value) => goto(`/${value}.html`)} />
+	<Scan
+		torch={scanTorch}
+		onscan={async (value) => {
+			const href = `/${value}.html`;
+			const data = await preloadData(href);
+			if (data.type === 'loaded' && data.status === 200 && data.data.item) await goto(href);
+		}}
+	/>
 {:else}
 	<form
 		bind:this={search}

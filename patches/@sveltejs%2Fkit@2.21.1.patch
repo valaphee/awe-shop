@@ -1,0 +1,65 @@
+diff --git a/src/runtime/client/client.js b/src/runtime/client/client.js
+index f831afa5db34a19f3f0a94001779d8ce2d901906..4ba1b28e4249dfab92830a9597cc7777ec78811b 100644
+--- a/src/runtime/client/client.js
++++ b/src/runtime/client/client.js
+@@ -2666,10 +2666,10 @@ async function _hydrate(
+  */
+ async function load_data(url, invalid) {
+ 	const data_url = new URL(url);
+-	data_url.pathname = add_data_suffix(url.pathname);
++	/*data_url.pathname = add_data_suffix(url.pathname);
+ 	if (url.pathname.endsWith('/')) {
+ 		data_url.searchParams.append(TRAILING_SLASH_PARAM, '1');
+-	}
++	}*/
+ 	if (DEV && url.searchParams.has(INVALIDATED_PARAM)) {
+ 		throw new Error(`Cannot used reserved query parameter "${INVALIDATED_PARAM}"`);
+ 	}
+@@ -2677,7 +2677,11 @@ async function load_data(url, invalid) {
+ 
+ 	// use window.fetch directly to allow using a 3rd party-patched fetch implementation
+ 	const fetcher = DEV ? dev_fetch : window.fetch;
+-	const res = await fetcher(data_url.href, {});
++	const res = await fetcher(data_url.href, {
++		headers: {
++			'accept': 'application/json'
++		}
++	});
+ 
+ 	if (!res.ok) {
+ 		// error message is a JSON-stringified string which devalue can't handle at the top level
+diff --git a/src/runtime/server/page/render.js b/src/runtime/server/page/render.js
+index 13c07e8c10fdd08dd59a749dfbb5d69b33b1e302..a3d3b70bcb147bd5075ddcb0a81567d5d6e331ba 100644
+--- a/src/runtime/server/page/render.js
++++ b/src/runtime/server/page/render.js
+@@ -478,7 +478,6 @@ export async function render_response({
+ 	}
+ 
+ 	const headers = new Headers({
+-		'x-sveltekit-page': 'true',
+ 		'content-type': 'text/html'
+ 	});
+ 
+diff --git a/src/runtime/server/respond.js b/src/runtime/server/respond.js
+index ad945974ef58ff0c2db6e5a2db065bed1f8f46c4..e9453a2a381e46a6af8a99b98d0a636b2fc144e4 100644
+--- a/src/runtime/server/respond.js
++++ b/src/runtime/server/respond.js
+@@ -95,15 +95,15 @@ export async function respond(request, options, manifest, state) {
+ 	 * for path resolution, then return the route object as a JS file.
+ 	 */
+ 	const is_route_resolution_request = has_resolution_suffix(url.pathname);
+-	const is_data_request = has_data_suffix(url.pathname);
++	const is_data_request = request.headers.get('accept') === 'application/json';
+ 
+ 	if (is_route_resolution_request) {
+ 		url.pathname = strip_resolution_suffix(url.pathname);
+ 	} else if (is_data_request) {
+-		url.pathname =
++		/*url.pathname =
+ 			strip_data_suffix(url.pathname) +
+ 				(url.searchParams.get(TRAILING_SLASH_PARAM) === '1' ? '/' : '') || '/';
+-		url.searchParams.delete(TRAILING_SLASH_PARAM);
++		url.searchParams.delete(TRAILING_SLASH_PARAM);*/
+ 		invalidated_data_nodes = url.searchParams
+ 			.get(INVALIDATED_PARAM)
+ 			?.split('')
