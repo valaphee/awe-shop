@@ -12,7 +12,7 @@
 	<title>{data.item.name}</title>
 </svelte:head>
 
-<div class="sticky top-0 w-full dark:bg-gray-900" style="font-size: 0">
+<div class="sticky top-0 w-full bg-gray-900" style="font-size: 0">
 	<a
 		href={data.back}
 		title={$locale.back}
@@ -25,7 +25,7 @@
 </div>
 
 <div itemprop="mainEntity" itemtype="https://schema.org/Product" itemscope>
-	<div class="p-2 dark:bg-gray-900">
+	<div class="p-2 bg-gray-900">
 		{#if data.item.image}
 			<img itemprop="image" src={data.item.image} alt="" class="h-60 w-60 m-auto" />
 		{:else}

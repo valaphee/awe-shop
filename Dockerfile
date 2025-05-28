@@ -4,6 +4,7 @@ WORKDIR /usr/src/app
 FROM base AS install
 RUN mkdir -p /temp
 COPY package.json bun.lock /temp/
+COPY patches /temp/patches
 RUN cd /temp && bun install --frozen-lockfile
 
 FROM base AS prerelease
