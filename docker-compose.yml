@@ -1,6 +1,6 @@
 services:
   web:
-    build: .
+    image: awe-shop
     environment:
       PGHOST: db
       PGUSER: postgres
