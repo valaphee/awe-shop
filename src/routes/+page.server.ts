@@ -1,4 +1,5 @@
 import type { PageServerLoad } from './$types';
+
 import { sql } from 'bun';
 
 export const load: PageServerLoad = async ({ url }) => {

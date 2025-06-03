@@ -1,8 +1,35 @@
 @import 'tailwindcss';
 
+@layer base {
+	:root {
+		--color-main: #f0f0f0;
+		--color-pane: #fbfbfb;
+		--color-primary: #1a1a1a;
+		--color-primary-0: #5f5f5f;
+		--color-secondary: #d20000;
+
+		@media (prefers-color-scheme: dark) {
+			--color-main: #202020;
+			--color-pane: #2b2b2b;
+			--color-primary: #ffffff;
+			--color-primary-0: #cfcfcf;
+			--color-secondary: #ff6545;
+		}
+	}
+}
+
+@theme {
+	--color-*: initial;
+	--color-main: --color-main;
+	--color-pane: --color-pane;
+	--color-primary: --color-primary;
+	--color-primary-detail: --color-primary-detail;
+	--color-secondary: --color-secondary;
+}
+
 html,
 body {
-	overscroll-behavior-y: none;
+	overscroll-behavior: none;
 }
 
 input[type='search']::-webkit-search-decoration,
@@ -17,7 +44,7 @@ button {
 }
 
 hr {
-	height: 1px;
+	height: 2px;
 	border: 0;
 	background: linear-gradient(in hsl longer hue 90deg, red 0 100%);
 }
