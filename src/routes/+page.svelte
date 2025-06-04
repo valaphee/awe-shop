@@ -70,16 +70,14 @@
 	<div class="grid p-1" style="grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr))">
 		{#each data.items as item (item.id)}
 			<a href="/{item.id}.html" class="flex flex-col m-1 p-1 rounded-lg bg-pane">
-				<div class="flex justify-center">
-					{#if item.image}
-						<img loading="lazy" src="{item.image}?imwidth=304" alt="" class="h-30 w-30" />
-					{:else}
-						<FontAwesomeIcon icon={faImage} class="h-30 w-30" />
-					{/if}
-				</div>
-				<h3 class="text-sm font-bold">{item.name}</h3>
+				{#if item.image}
+					<img loading="lazy" src="{item.image}?imwidth=304" alt="" class="h-30 w-30 m-auto" />
+				{:else}
+					<FontAwesomeIcon icon={faImage} class="h-30 w-30 m-auto" />
+				{/if}
+				<h3 itemprop="name" class="text-sm font-bold">{item.name}</h3>
 				<div class="flex flex-col justify-end" style="flex-basis: 100%">
-					<span class="flex flex-row justify-end">1,99 €</span>
+					<span class="flex flex-row justify-end">{item.price}</span>
 				</div>
 			</a>
 		{/each}

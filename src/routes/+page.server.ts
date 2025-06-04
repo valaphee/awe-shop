@@ -9,7 +9,8 @@ export const load: PageServerLoad = async ({ url }) => {
 		items: items.map((item) => ({
 			id: item.id,
 			name: item.name,
-			image: item.image
+			image: item.image,
+			price: 'Unknown'
 		}))
 	};
 };

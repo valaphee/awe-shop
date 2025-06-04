@@ -2,6 +2,8 @@
 	import type { LayoutProps } from './$types';
 	let { data }: LayoutProps = $props();
 
+	import { page } from '$app/state';
+
 	import { FontAwesomeIcon } from '$lib/components';
 	import locale from '$lib/locales';
 	import { preventDefault } from '$lib/utils';
@@ -24,13 +26,17 @@
 	<hr />
 </div>
 
-<div itemprop="mainEntity" itemtype="https://schema.org/Product" itemscope>
+<div itemprop="mainEntity" itemscope itemtype="https://schema.org/Product">
 	<div class="p-2 bg-pane">
+		<meta itemprop="gtin" content={page.params.id} />
 		{#if data.item.image}
 			<img itemprop="image" src={data.item.image} alt="" class="h-60 w-60 m-auto" />
 		{:else}
 			<FontAwesomeIcon icon={faImage} class="h-60 w-60 m-auto" />
 		{/if}
 		<h1 itemprop="name" class="text-xl font-bold">{data.item.name}</h1>
+		<div class="flex flex-col justify-end" style="flex-basis: 100%">
+			<span class="flex flex-row justify-end text-xl">Unknown</span>
+		</div>
 	</div>
 </div>
